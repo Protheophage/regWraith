@@ -1,0 +1,43 @@
+.\" (C) Copyright 2017 Colby Connolly <protheophage@gmail.com>,
+.\"
+.TH REGWRAITH "1"
+.SH NAME
+regWraith \- Finds windows registry files.
+
+.SH SYNOPSIS
+.B regWraith
+.SH DESCRIPTION
+.PP
+Finds windows registry files, and copies them in a forensically sound manner to the "flag" directory "uunique_dirrr_nammme" on a destination device
+
+In order for this tool to function properly, the destination device must have a directory named "uunique_dirrr_nammme" located in the root directory.
+
+regWraith was created with the idea that it would be used on a live Linux USB for easy field automation.
+
+This tool was created with and tested on Kali Linux.
+
+regWraith has been tested and found to copy Windows 7 and Windows 10 registry files in a forensically sound manner. This means that:
+	1)All devices, excluding the destination device, are mounted in a read only state.
+	2)None of the registry files are altered from their original state in any way.
+	3The input and output files are hashed for integrity.
+
+.SH OPTIONS
+This program needs no user input. It is full automated.
+
+.SH CREDITS
+This tool uses the following programs to accomplish the desired tasks
+UMOUNT FDISK GREP MKDIR ECHO MOUNT FIND READ MAPFILE SED
+For information about these tools please see the appropriate manual pages (i.e. man umount)
+
+.SH AUTHOR
+Written by Colby Connolly
+
+.SH "REPORTING BUGS"
+protheophage@gmail.com
+
+.SH COPYRIGHT
+Copyright \(co 2016 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+.br
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.

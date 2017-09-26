@@ -1,0 +1,49 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+Format: 1.8
+Date: Tue, 26 Sep 2017 12:29:20 -0700
+Source: regwraith
+Binary: regwraith
+Architecture: source all
+Version: 2.0-1
+Distribution: unstable
+Urgency: medium
+Maintainer: Colby Connolly <protheophage@gmail.com>
+Changed-By: Colby Connolly <protheophage@gmail.com>
+Description:
+ regwraith  - <insert up to 60 chars description>
+Changes:
+ regwraith (2.0-1) unstable; urgency=medium
+ .
+   * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+Checksums-Sha1:
+ 3e63302dd6bc8837101179bd3588cdab6778593f 1395 regwraith_2.0-1.dsc
+ f6d3a961405fd5a62f55c9627e4bcc17bf0b4337 1500 regwraith_2.0.orig.tar.xz
+ ea56ec9c38f04147e2dbb9cade6894fd719d086b 2920 regwraith_2.0-1.debian.tar.xz
+ 852248459414e8449f6bc0b1ea12a2754a76064c 4540 regwraith_2.0-1_all.deb
+ 933f2f0529f456e22ccddcdbce45bed846a82409 5286 regwraith_2.0-1_amd64.buildinfo
+Checksums-Sha256:
+ 3f7b1a96e2e87e5e365f5355ac0e13fba72d370a20eda168c2e8e79afbcb2248 1395 regwraith_2.0-1.dsc
+ 3836dbf732461b7fa296fa7e9cef83977adf6691abfd9b4a1467ab88893b2a54 1500 regwraith_2.0.orig.tar.xz
+ e8212714ada3d6ee304d566cea60ce4617183b9603e0540601962ca51969f061 2920 regwraith_2.0-1.debian.tar.xz
+ a295b77eb001b625441aa6f720016b188ffbdb5f833996aab2359796949a3158 4540 regwraith_2.0-1_all.deb
+ 2571eb6da9d1e82e32915e5ee58cf4549a3369a472558fedca4511605b885b61 5286 regwraith_2.0-1_amd64.buildinfo
+Files:
+ ca5fb7a5584c235057f1fc5c46e7e07a 1395 unknown optional regwraith_2.0-1.dsc
+ 66875edd717b514fcce64641a4718ace 1500 unknown optional regwraith_2.0.orig.tar.xz
+ e78d7ff9bf409e742cd77c103414f664 2920 unknown optional regwraith_2.0-1.debian.tar.xz
+ fd8271f092bc25bc0fa3e040f15ab7b5 4540 unknown optional regwraith_2.0-1_all.deb
+ 7fadf0dbbaefacbb4e9338e44e91625b 5286 unknown optional regwraith_2.0-1_amd64.buildinfo
+
+-----BEGIN PGP SIGNATURE-----
+
+iQFLBAEBCAA1FiEE23Oc1mYbwTGudkLNWaBVsT+bU9QFAlnKrPUXHHByb3RoZW9w
+aGFnZUBnbWFpbC5jb20ACgkQWaBVsT+bU9RxzQf/Txq/4+PwzZpg3X+iszJ3j5fF
+U8Xj0ML4PYdHsAP+HpeST/3fDXtyuigOelTWOmLwsQcEgpn7pDiK8Ulu+ZPn/EQy
+pEV22ouj5ofbSLYFs+mLdWHwkgNzFkk68HDWZmISObVBKBb/Ko9lFhsQj8SUIdte
+A+F51B/hkw2+owjcu065qnr3cZscb/9qevQ1qBnHuoY9ZisQnnTQJpStqAQoTCM6
+PB5UfYHUi2c3L6qbHiP6b2M05MxEF32Kythbh02bTZnuqSN5+28UeIAkp5yewOMi
+8wREYBDj4uMTOs6Q/NAkGjTBiWciWMxBn5y/40RBt8kmxCD358nuGUrPDemDkQ==
+=De8s
+-----END PGP SIGNATURE-----

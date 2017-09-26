@@ -1,0 +1,10 @@
+Package: regwraith
+Version: 2.0-1
+Architecture: all
+Maintainer: Colby Connolly <protheophage@gmail.com>
+Installed-Size: 19
+Section: unknown
+Priority: optional
+Homepage: <insert the upstream URL, if relevant>
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>

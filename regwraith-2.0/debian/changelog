@@ -1,0 +1,5 @@
+regwraith (2.0-1) unstable; urgency=medium
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Colby Connolly <protheophage@gmail.com>  Tue, 26 Sep 2017 12:29:20 -0700
